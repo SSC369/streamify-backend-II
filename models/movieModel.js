@@ -12,7 +12,6 @@ const movieSchema = new mongoose.Schema({
   id: {
     type: Number,
     required: true,
-    unique: true,
   },
   genre_ids: {
     type: Array,
@@ -32,6 +31,11 @@ const movieSchema = new mongoose.Schema({
   mediaType: {
     type: String,
     required: true,
+  },
+  saveId: {
+    type: String,
+    required: true,
+    unique: true,
   },
 });
 

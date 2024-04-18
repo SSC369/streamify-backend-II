@@ -1,8 +1,10 @@
 const Movie = require("../models/movieModel");
+const { v4 } = require("uuid");
 
 module.exports.addMovie = async (req, res, next) => {
   try {
     const userId = req.user.userDetails._id;
+    console.log(req.user);
     const {
       id,
       mediaType,
@@ -13,7 +15,8 @@ module.exports.addMovie = async (req, res, next) => {
       vote_average,
     } = req.body;
 
-    const findMovie = await Movie.findOne({ id });
+    const findMovie = await Movie.findOne({ id, userId });
+
     if (findMovie) {
       return res.json({ status: false, msg: "Movie is already saved :)" });
     }
@@ -27,6 +30,7 @@ module.exports.addMovie = async (req, res, next) => {
       poster_path,
       release_date,
       vote_average,
+      saveId: v4(),
     });
     return res.json({ status: true, msg: "Movie Saved successfully :)" });
   } catch (error) {

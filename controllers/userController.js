@@ -38,9 +38,9 @@ module.exports.register = async (req, res, next) => {
     };
     const jwtToken = await jwt.sign(payload, secretKey);
 
-    return res.json({ status: true, jwtToken, userDetails });
+    return res.status(201).json({ status: true, jwtToken, userDetails });
   } catch (error) {
-    return res.json({ msg: "Server issue :(", status: false });
+    return res.status(500).json({ msg: "Server issue :(", status: false });
   }
 };
 
@@ -66,8 +66,8 @@ module.exports.login = async (req, res, next) => {
     };
     const jwtToken = await jwt.sign(payload, secretKey);
 
-    return res.json({ status: true, jwtToken, userDetails });
+    return res.status(200).json({ status: true, jwtToken, userDetails });
   } catch (error) {
-    return res.json({ msg: "Server issue :(", status: false });
+    return res.status(500).json({ msg: "Server issue :(", status: false });
   }
 };
